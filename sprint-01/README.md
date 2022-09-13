@@ -1,36 +1,15 @@
-# Welcome to Java Marathon
-## JOM. Classes. Encapsulation. Exceptions
+# JOM Classes. Encapsulation. Exceptions
+## Task1
 
-You can start by cloning the repository to your computer using the following command:
-```
-git clone <url>
-```
-You can copy the Url here
+Suppose we have the next class:
 
-<img width="968" alt="Screenshot 2022-05-10 at 23 06 42" src="https://user-images.githubusercontent.com/61456363/167713268-c89a4125-9467-47a6-a2d8-eb6fcefcc1dd.png">
+![image](https://user-images.githubusercontent.com/61456363/168443353-561613d4-8f4e-4fb8-9988-4becf10007e6.png)
 
- 
-This sprint contains a few tasks. Unit tests for the tasks are in the separate branches **task1**, **task2**, **task3**.... 
+Create a new version of the **Circle** class where the **draw** method will be overloaded four times:
 
-You can switch between branches using a command
-```
- git checkout <branch name>
-```
- e.g.
-```
- git checkout task1
- ```
- > Don't forget to commit your code before switching to another branch
- 
- In the **main** folder first you need to complete your code with the solution of the taks
- 
-After this uncomment all tests in folder **test** and run the code
-```
-mvn test
-```
-or (if you haven't installed Maven on your PC)
-```
-./mvnw test
-```
-or just use command `Run` from your IDE
- 
+1. The version without parameters.
+2. Using the one parameter **color** of **String** type.
+3. Using the one parameter **scale** of **float** type.
+4. Using two parameters **color** and **scale** of **String** and **float** type.
+
+> For correct passing of all tests don't use print and println methods in your code.
