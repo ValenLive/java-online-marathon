@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update existing To-Do</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+<div th:replace="header"></div>
+
+<h1>Update ToDo</h1>
+
+<form action="#" th:action="@{|/todos/${todo.getId()}/update/users/${owner_id}|}" th:object="${todo}" method="POST" autocomplete="off">
+     <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{createdAt}">
+    <input type="hidden" th:field="*{owner}">
+    <input type="hidden" th:field="*{tasks}">
+    <input type="hidden" th:field="*{collaborators}">
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td>
+                <input type="text" th:field="*{title}">
+                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input class="my-button" type="submit" value="Update">
+            </td>
+            <td>
+                <input class="my-button" type="reset" value="Clear">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a th:href="@{|/todos/all/users/${owner_id}|}">Go to To-Do List</a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

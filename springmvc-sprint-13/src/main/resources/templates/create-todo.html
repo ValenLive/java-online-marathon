@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New ToDo List</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div th:replace="header"></div>
+
+<div>
+    <h1>Create New ToDo List</h1>
+</div>
+
+<form th:object="${todo}" method="post" autocomplete="off">
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td>
+                <input type="text" th:field="*{title}" />
+                <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input class="my-button" type="submit" value="Create"/>
+            </td>
+            <td>
+                <input class="my-button" type="reset" value="Clear"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a th:href="@{|/todos/all/users/${ownerId}|}">Go to To-Do List</a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

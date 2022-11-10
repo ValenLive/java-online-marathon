@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Tasks of ToDo List</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+<div th:replace="/header :: header"></div>
+
+<h2 th:text="${'All Tasks Rrom ' + ownerName + ' ToDo #' + todo.getId()}"></h2>
+
+<div style="width: auto; display: flex; justify-content: flex-end; margin: 20px; padding: 0 22em 0 0;">
+    <a class="a-without-line" th:href="@{/tasks/create/todos/{todo_id}(todo_id=${todo.getId()})}">
+        <input type="button" class="my-button" value="Create new task">
+    </a>
+</div>
+
+<h1>Tasks:</h1>
+
+<table>
+    <tr>
+        <th>No.</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Priority</th>
+        <th>State</th>
+        <th colspan="2">Operations</th>
+    </tr>
+    <tr th:each="task, i: ${tasks}">
+        <td th:text="${i.count}">count</td>
+        <td th:text="${task.getId()}"/>
+        <td th:text="${task.getName()}"/>
+        <td th:text="${task.getPriority()}"/>
+        <td th:text="${task.getState().getName()}"/>
+        <td>
+            <a th:href="@{/tasks/{task_id}/update/todos/{todo_id}(task_id=${task.getId()}, todo_id=${task.getTodo().getId()})}">
+                Edit </a>
+        </td>
+        <td>
+            <a th:href="@{/tasks/{task_id}/delete/todos/{todo_id}(task_id=${task.getId()}, todo_id=${task.getTodo().getId()})}">
+                Remove </a>
+        </td>
+    </tr>
+</table>
+
+<h2>Collaborators:</h2>
+<div style="padding: 5px 20px 0 20px;">
+    <form th:action="@{/todos/{id}/add(id = ${todo.id})}" method="get">
+        <select name="user_id">
+            <option>Select collaborator...</option>
+            <option th:each="user : ${users}" th:value="${user.id}"
+                    th:text="${user.firstName + ' ' + user.lastName}"></option>
+        </select>
+        <input class="my-button" type="submit" value="Add">
+    </form>
+    <br>
+
+    <div th:each="collaborator, i: ${todo.collaborators}">
+
+        <a th:text="${i.index + 1}"/>
+        <a th:href="@{|/todos/all/users/${collaborator.id}|}"
+           th:text="${collaborator.firstName + ' ' + collaborator.lastName}"/>
+        <i>&emsp;&emsp;&emsp;</i>
+        <a th:href="@{/todos/{id}/remove(id = ${todo.id}, user_id = ${collaborator.id})}">Remove</a>
+    </div>
+
+</div>
+
+<div style="padding: 20px 20px 40px 280px;">
+    <a th:href="@{|/todos/all/users/${todo.owner.id}|}">Go to ToDo Lists</a>
+</div>
+
+
+
+</body>
+</html>

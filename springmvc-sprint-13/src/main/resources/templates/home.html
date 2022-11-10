@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div th:insert="header.html"></div>
+    <h1>List of Users</h1>
+
+    <div style="width: auto; display: flex; justify-content: flex-end; margin: 20px; padding: 0 22em 0 0;">
+        <a class="a-without-line" th:href="@{/users/create}"><input type="button" class="my-button" value="Create new User"></a>
+    </div>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Id</th>
+            <th>Full name</th>
+            <th>E-mail</th>
+            <th colspan="2">Operations</th>
+        </tr>
+        <tr th:each="user, i: ${users}">
+            <td th:text="${i.count}">count</td>
+            <td th:text="${user.getId()}"/>
+            <td>
+                <a th:href="@{/todos/all/users/{user_id}(user_id=${user.getId()})}"
+                   th:text="${user.getFirstName() + ' ' + user.getLastName()}"></a>
+            </td>
+            <td th:text="${user.getEmail()}"/>
+            <td>
+                <a th:href="@{/users/{id}/update(id=${user.getId()})}"> Edit </a>
+            </td>
+            <td>
+                <a th:href="@{/users/{id}/delete(id=${user.getId()})}"> Remove </a>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
+

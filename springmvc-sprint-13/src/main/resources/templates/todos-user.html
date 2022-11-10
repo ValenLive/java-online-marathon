@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All ToDo lists of User</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+<div th:replace="/header :: header"></div>
+
+<h1 th:text="${'All To-Do Lists of ' + user.getFirstName() + ' ' + user.getLastName()}"></h1>
+
+
+<div style="width: auto; display: flex; justify-content: flex-end; margin: 20px; padding: 0 22em 0 0;">
+    <a class="a-without-line" th:href="@{/todos/create/users/{owner_id}(owner_id=${user.getId()})}">
+        <input type="button" class="my-button" value="Create new ToDo List">
+    </a>
+</div>
+
+
+<table>
+    <tr>
+        <th>No.</th>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created At</th>
+        <th>Owner</th>
+        <th colspan="2">Operations</th>
+    </tr>
+    <tr th:each="todo, i: ${todos}">
+        <td th:text="${i.count}">count</td>
+        <td th:text="${todo.getId()}"/>
+        <td>
+            <a th:href="@{/todos/{id}/tasks(id=${todo.getId()})}">
+                <span th:text="${todo.getTitle()}"></span>
+            </a>
+        </td>
+        <td th:text="${#temporals.format(todo.getCreatedAt(), 'dd.MM.yyyy HH:mm')}"/>
+        <td th:text="${todo.getOwner().getFirstName() + ' ' + todo.getOwner().getLastName()}"/>
+        <td>
+            <a th:href="@{/todos/{todo_id}/update/users/{owner_id}
+            (todo_id=${todo.getId()}, owner_id=${user.getId()})}"> Edit </a>
+        </td>
+        <td>
+            <a th:href="@{/todos/{todo_id}/delete/users/{owner_id}
+            (todo_id=${todo.getId()}, owner_id=${user.getId()})}"> Remove </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Task</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="/header :: header"></div>
+
+<h1>Create task</h1>
+
+<form th:action="@{/tasks/create/todos/{todo_id}(todo_id=${todo_id})}" th:object="${task}" method="POST" autocomplete="off">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}" placeholder="Name"></td>
+        </tr>
+
+        <tr>
+            <td>Priority:</td>
+            <td>
+                <select name="role" required th:field="*{priority}">
+                    <option th:each="priority : ${priorities}"
+                            th:value="${priority}"
+                            th:text="${priority.toString()}"
+                            th:selected="${priority.LOW}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input class="my-button" type="submit" value="Create"></td>
+            <td><input class="my-button" type="reset" value="Clear"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

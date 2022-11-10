@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Task</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+<div th:replace="/header :: header"></div>
+
+<div>
+    <h1>Update Task</h1>
+    <form th:action="@{/tasks/{taskId}/update/todos/{todo_id}(todo_id=${todo_id}, taskId=${taskDto.id})}"
+          th:object="${taskDto}" method="post" autocomplete="off">
+        <table>
+            <tr>
+                <td>Id:</td>
+                <td>
+                    <input type="text" th:field="*{id}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>Priority:</td>
+                <td>
+                    <select name="priority"  th:field="*{priority}">
+                        <option th:each="priorities : ${T(com.softserve.itacademy.model.Priority).values()}"
+                                th:value="${priorities}" th:text="${priorities}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <select name="state" th:field="*{stateId}">
+                        <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class="my-button" type="submit" value="Update"> </td>
+                <td><input class="my-button" type="reset" value="Clear"></td>
+            </tr>
+        </table>
+
+        <p></p>
+    </form>
+    <div style="width: auto; display: flex; justify-content: flex-end; margin: 20px; padding: 0 22em 0 0;">
+        <a th:href="@{/todos/{todo_id}/tasks(todo_id=${todo_id})}">Go to Task List</a>
+    </div>
+
+</div>
+</body>
+</html>
