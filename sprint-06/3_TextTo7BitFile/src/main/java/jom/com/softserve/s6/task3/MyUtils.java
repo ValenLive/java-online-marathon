@@ -1,6 +1,8 @@
 package jom.com.softserve.s6.task3;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class MyUtils {
     public static void writeFile(String filename, String text) {

@@ -5,8 +5,7 @@ import java.time.LocalDate;
 public class MyUtils {
 
     public static boolean isLeapYear(int year) {
-        LocalDate date = LocalDate.of(year, 1, 1);
-        return date.isLeapYear();
+        return LocalDate.of(year, 1, 1).isLeapYear();
     }
 
 }
